@@ -6,6 +6,7 @@ export const SHOW_ALL = 'SHOW_ALL'
 export const SHOW_COMPLETED = 'SHOW_COMPLETED'
 export const SHOW_ACTIVE = 'SHOW_ACTIVE'
 export const DELETE_TODO = 'DELETE_TODO'
+export const EDIT_TODO = 'EDIT_TODO'
 
 export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
@@ -24,6 +25,8 @@ export function deleteTodo(index) {
   console.log({ type:  DELETE_TODO, payload: index })
   return { type:  DELETE_TODO, payload: index}
 }
+
+
 
 export function toggleTodo(index) {
   return { type: TOGGLE_TODO, payload: index }

@@ -35157,7 +35157,7 @@ exports.addTodo = addTodo;
 exports.deleteTodo = deleteTodo;
 exports.toggleTodo = toggleTodo;
 exports.setVisibilityFilter = setVisibilityFilter;
-exports.VisibilityFilters = exports.DELETE_TODO = exports.SHOW_ACTIVE = exports.SHOW_COMPLETED = exports.SHOW_ALL = exports.SET_VISIBILITY_FILTER = exports.TOGGLE_TODO = exports.ADD_TODO = void 0;
+exports.VisibilityFilters = exports.EDIT_TODO = exports.DELETE_TODO = exports.SHOW_ACTIVE = exports.SHOW_COMPLETED = exports.SHOW_ALL = exports.SET_VISIBILITY_FILTER = exports.TOGGLE_TODO = exports.ADD_TODO = void 0;
 const ADD_TODO = 'ADD_TODO';
 exports.ADD_TODO = ADD_TODO;
 const TOGGLE_TODO = 'TOGGLE_TODO';
@@ -35172,6 +35172,8 @@ const SHOW_ACTIVE = 'SHOW_ACTIVE';
 exports.SHOW_ACTIVE = SHOW_ACTIVE;
 const DELETE_TODO = 'DELETE_TODO';
 exports.DELETE_TODO = DELETE_TODO;
+const EDIT_TODO = 'EDIT_TODO';
+exports.EDIT_TODO = EDIT_TODO;
 const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
   SHOW_COMPLETED: 'SHOW_COMPLETED',
@@ -35240,6 +35242,13 @@ function todos(state = [{
       }];
 
     case _actions.DELETE_TODO:
+      return state.filter((todo, index) => {
+        if (index !== action.payload) {
+          return todo;
+        }
+      });
+
+    case _actions.EDIT_TODO:
       return state.filter((todo, index) => {
         if (index !== action.payload) {
           return todo;
@@ -35340,6 +35349,34 @@ const DeleteToDo = ({
 
 var _default = DeleteToDo;
 exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"containers/EditTodo.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const EditToDo = ({
+  onClick
+}) => {
+  return _react.default.createElement("button", {
+    onClick: e => {
+      console.log('Delete button click');
+      e.preventDefault();
+      onClick();
+    }
+  }, "Delete");
+};
+
+var _default = EditToDo;
+exports.default = _default;
 },{"react":"../node_modules/react/index.js"}],"components/ToDo.js":[function(require,module,exports) {
 "use strict";
 
@@ -35352,13 +35389,16 @@ var _react = _interopRequireDefault(require("react"));
 
 var _DeleteToDo = _interopRequireDefault(require("../containers/DeleteToDo"));
 
+var _EditTodo = _interopRequireDefault(require("../containers/EditTodo"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const ToDo = ({
   completed,
   text,
   onClick,
-  onToDoDeleteClick
+  onToDoDeleteClick,
+  onToDoEditClick
 }) => {
   console.log(`6. todo render..again. and again...`);
   return _react.default.createElement("table", null, _react.default.createElement("tbody", null, _react.default.createElement("tr", null, _react.default.createElement("td", {
@@ -35373,7 +35413,7 @@ const ToDo = ({
 
 var _default = ToDo;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../containers/DeleteToDo":"containers/DeleteToDo.js"}],"components/ToDoList.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../containers/DeleteToDo":"containers/DeleteToDo.js","../containers/EditTodo":"containers/EditTodo.js"}],"components/ToDoList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35679,7 +35719,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59376" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57189" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
